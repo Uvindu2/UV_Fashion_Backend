@@ -19,21 +19,18 @@ cart        .save()
 
 router.get('/:userId', (req, res) => {
     const userId = req.params.userId;
-    // Find the cart with the given userId
-    Cart.findOne({ userId: userId })
-        .then((cart) => {
-            if (cart) {
-                res.json(cart);
+    console.log("Received userId:", userId);
+    Cart.find({ userId: userId })
+        .then((carts) => {
+            if (carts.length > 0) {
+                res.json(carts);
             } else {
-                res.status(404).json({ message: "Cart not found" });
+                res.status(404).json({ message: "Carts not found for this user" });
             }
         })
         .catch((error) => {
             res.status(500).json({ message: error.message });
         });
 });
-
-module.exports = router;
-
 
 module.exports = router;
