@@ -8,6 +8,7 @@ app.use(bodyParser.json());
 
 const userRoutes = require('./routes/user')
 const productRoutes = require('./routes/product')
+const cartRoutes = require('./routes/cart')
 
 app.get('/', (req, res) => {
     res.send('This is a string output from the API');
@@ -27,6 +28,7 @@ app.use('/api/users', userRoutes);
 //product routes
 
 app.use('/api/products', productRoutes);
+app.use('/api/cart', cartRoutes);
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
