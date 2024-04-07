@@ -33,4 +33,21 @@ router.get('/:userId', (req, res) => {
         });
 });
 
+router.delete('/:cartId', (req, res) => {
+    const cartId = req.params.cartId;
+    
+    // Find and delete the cart with the given cart ID
+    Cart.findByIdAndDelete(cartId)
+        .then((deletedCart) => {
+            if (deletedCart) {
+                res.json({ message: "Cart deleted successfully" });
+            } else {
+                res.status(404).json({ message: "Cart not found" });
+            }
+        })
+        .catch((error) => {
+            res.status(500).json({ message: error.message });
+        });
+});
+
 module.exports = router;
